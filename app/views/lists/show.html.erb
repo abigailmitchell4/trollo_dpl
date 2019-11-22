@@ -1,0 +1,16 @@
+<h1><%= @list.list_name %></h1>
+<h2>In Progress Tasks</h2>
+<%= link_to 'Add Task', new_list_task_path(@list) %>
+<% @list.tasks.each do |task| %>
+  <%= render 'tasks/task', { task: task } %>
+  <%# purple comment: references the variable in _comment.html.erb, second comment is what you named your loop variable
+  this renders 'comments' view folder and references the partial named 'comment' %>
+<% end %>
+
+<h2>Completed Tasks</h2>
+<% @list.tasks.each do |task| %>
+  <%= render 'lists/completed', { task: task } %>
+  <%# purple comment: references the variable in _comment.html.erb, second comment is what you named your loop variable
+  this renders 'comments' view folder and references the partial named 'comment' %>
+<% end %>
+

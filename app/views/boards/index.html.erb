@@ -1,0 +1,5 @@
+<h1>Boards</h1>
+
+<% @boards.each do |board| %>
+  <%= render 'boards/list', { board: board } %>
+<% end %>

@@ -1,0 +1,4 @@
+<p><%= task.task_name%></p>
+<p><strong><%= task.task_priority%></strong></p>
+<p><strong><%= task.description%></strong></p>
+<h3><%= link_to 'Completed', completed_path(@list, task), method: :post, class:"ui button"%></h3>

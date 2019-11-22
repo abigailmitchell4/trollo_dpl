@@ -1,0 +1,13 @@
+<h1>Click a list To View Content</h1>
+<%= link_to 'Create a new list', new_board_list_path(@board) %>
+<div>
+  <% @board.lists.each do |list| %>
+    <%= link_to list.list_name, board_list_path(@board, list) %> -
+    <%=list.list_priority %>
+    
+    <%= link_to "Edit", edit_board_list_path(@board, list), class: "ui orange button" %>
+    <%= link_to "Delete", board_list_path(@board, list), method: :delete, class: "ui red button" %>
+  <% end %>
+</div>
+<br/>
+<%= link_to 'Back To board', boards_path %>

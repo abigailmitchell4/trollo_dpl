@@ -1,0 +1,6 @@
+<div>
+    <h1><%= board.board_name %></h1>
+<%=link_to 'View Lists', board_lists_path(board) %>
+<%= link_to "Edit", edit_board_path(board), class: "ui orange button" %>
+<%= link_to "Delete", board, method: :delete, class: "ui red button" %>
+  </div>

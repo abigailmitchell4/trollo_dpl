@@ -1,7 +1,10 @@
-<div>
-  <h1 class= "ui small heading" ><%= board.board_name%></h1>
-   <h4 class="ui small button"> <%=link_to 'View Lists', board_lists_path(board) %></h4>
+<div class="ui center aligned content">
+  <h1 class= "ui small center aligned heading" ><%= board.board_name%></h1>
+    <h4 class="ui small button"> <%=link_to 'View Lists', board_lists_path(board) %></h4>
+  <br/>
+  <br/>
+  <div class="extra content">
+    <%= link_to "Edit", edit_board_path(board), class: "ui orange mini button" %>
+    <%= link_to "Delete", board, method: :delete, class: "ui red  mini button" %>
+  </div>
 </div>
-<br/>
-<%= link_to "Edit", edit_board_path(board), class: "ui orange mini button" %>
-<%= link_to "Delete", board, method: :delete, class: "ui red  mini button" %>

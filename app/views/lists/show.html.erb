@@ -1,43 +1,44 @@
 <br/>
 <h1 class="ui center aligned header"><%= @list.list_name %></h1>
 <h1 class="ui center aligned header">T A S K S</h1>
+<%= link_to 'Add Task', new_list_task_path(@list), class:"ui mini center aligned green button" %>
+<%= link_to 'Back To List', board_lists_path, class: "ui right floated mini button"%>
+<br/>
 <hr/>
-<div class="ui grid">
-  <div class="sixteen wide mobile eight wide tablet four wide computer column">
-    <div class="ui red card">
+
+<div class="ui centered cards">
+  <div class="card">
+    <div class="content">
+      <h2>In Progress Tasks</h2>
+        
+      <hr/>
       <div class="content">
-        <h2>In Progress Tasks</h2>
-        <%= link_to 'Add Task', new_list_task_path(@list), class:"ui mini green button" %>
-        <hr/>
         <% @list.tasks.each do |task| %>
-          <div>
           <% if task.completed == false %>
-            <p><strong><%= task.task_name%></strong></p>
-            <div class="ui extra content">
-              <p style="color: blue;"><%= task.task_priority%></p>
-              <p><%= task.description%></p>
-            </div>
-            <div>
-              <%= link_to 'Edit Task', edit_list_task_path(@list, task)%>
-              <%= link_to 'Deleted Task', list_task_path(@list, task), method: :delete%>
-              <%= link_to 'Completed', completed_path(@list, task), method: :patch, class:"ui button" %>
-            </div>
-          </div>
+            <h3><strong><%= task.task_priority%>) <%= task.task_name%></strong></h3>
+            <p><%= task.description%></p>
+            
+            <%= link_to 'Edit', edit_list_task_path(@list, task), class:"ui mini button"%>
+            <%= link_to 'Delete', list_task_path(@list, task), method: :delete, class:"ui mini button"%>
+            <%= link_to 'Completed', completed_path(@list, task), method: :patch, class:"ui mini button" %>
           
           <% end %>
         <% end %>
       </div>
     </div>
-
-
+  </div>
+  <div class="card">
+    <div class="content">
       <h2>Completed Tasks</h2>
-    
-      <% @list.tasks.each do |task| %>
+        <hr/>
+        <% @list.tasks.each do |task| %>
           <% if task.completed? %>
             <h4><%= task.task_name%></h4>
-        <%end%>
-      <% end %>
-
+            <%= link_to 'Clear Tasks', clear_tasks_path(@list, task), method: :delete, class:"ui mini button" %>
+          <% end%>
+        <% end %>
+        
+    </div>
   </div>
 </div>
 

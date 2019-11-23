@@ -1,1 +1,52 @@
-@import "semantic-ui"
+@import "semantic-ui";
+
+body {
+  background-color: #83dad6;
+}
+
+.ui.menu {
+  background-color: #8eb7ff;
+}
+.larger-font {
+  font-size: 20px;
+  font-weight: 600;
+  color: #b76d00;
+}
+
+.ui.center.aligned.header {
+  background-color: none;
+
+}
+.largest-font {
+  font-size: 50px;
+  font-weight: 700;
+  color:#b76d00;
+}
+.ui.menu.item {
+  color: #b76d00;
+}
+.orange-color {
+  color: #b76d00;
+}
+.ui.card {
+  background-color: #fffcf8;
+}
+
+.ui.color3.button{
+  background-color: #ffbc5b;
+  color: #fff;
+}
+
+.blue-color2 {
+  color: #00059a;
+}
+.padding1 {
+  padding:0.7rem;
+}
+.padding2 {
+  padding: 0.3rem;
+}
+
+.i.padding3 {
+  padding: 0 0.5rem;
+}

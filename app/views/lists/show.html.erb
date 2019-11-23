@@ -1,27 +1,30 @@
 <br/>
-<h1 class="ui center aligned header"><%= @list.list_name %></h1>
+<div class="ui center aligned header">
+  <h1 class="largest-font"><%= @list.list_name %></h1>
+</div>
 <h1 class="ui center aligned header">T A S K S</h1>
-<%= link_to 'Add Task', new_list_task_path(@list), class:"ui mini center aligned green button" %>
-<%= link_to 'Back To List', board_lists_path, class: "ui right floated mini button"%>
+<%= link_to 'Add Task', new_list_task_path(@list), class:"ui small center aligned blue button" %>
+<%= link_to 'Back To List', board_lists_path, class: "ui right floated small blue button"%>
 <br/>
 <hr/>
-
+<br/>
 <div class="ui centered cards">
   <div class="card">
     <div class="content">
       <h2>In Progress Tasks</h2>
         
       <hr/>
+      <br/>
       <div class="content">
         <% @list.tasks.each do |task| %>
           <% if task.completed == false %>
-            <h3><strong><%= task.task_priority%>) <%= task.task_name%></strong></h3>
+            <h3><%= task.task_name%></h3>
             <p><%= task.description%></p>
-            
-            <%= link_to 'Edit', edit_list_task_path(@list, task), class:"ui mini button"%>
-            <%= link_to 'Delete', list_task_path(@list, task), method: :delete, class:"ui mini button"%>
-            <%= link_to 'Completed', completed_path(@list, task), method: :patch, class:"ui mini button" %>
-          
+            <div class="ui extra content">
+              <i class="pencil alternate icon padding1"><%= link_to '', edit_list_task_path(@list, task)%></i>
+              <i class="trash alternate icon padding1"<%= link_to '', list_task_path(@list, task), method: :delete%></i>
+              <%= link_to 'Completed', completed_tasks_path(@list, task), method: :patch, class: "padding1" %>
+            </div>
           <% end %>
         <% end %>
       </div>
@@ -34,10 +37,10 @@
         <% @list.tasks.each do |task| %>
           <% if task.completed? %>
             <h4><%= task.task_name%></h4>
-            <%= link_to 'Clear Tasks', clear_tasks_path(@list, task), method: :delete, class:"ui mini button" %>
+            <%= link_to 'Remove', clear_tasks_path(@list, task), method: :delete, class:"ui mini orange button" %>
           <% end%>
         <% end %>
-        
+    
     </div>
   </div>
 </div>

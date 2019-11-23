@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :completed, :clear_tasks]
 
   def index
-    @tasks = @list.tasks
+    @tasks = Task.all_tasks(current_user.id)
   end
 
   def show
@@ -36,15 +36,18 @@ class TasksController < ApplicationController
     redirect_to board_list_path(@list.board_id, @list)
   end
 
-  def completed
+  def completed_tasks
     Task.find(params[:id]).update_attribute(:completed, true)
     redirect_to board_list_path(@list.board_id, @list)
   end
 
   def clear_tasks
-    @list.tasks.clear.where(completed: true)
-
-    redirect_to board_list_path(@list.board_id, @list)
+    if @task.completed == true
+       @task.destroy
+       redirect_to board_list_path(@list.board_id, @list)
+    else
+      redirect_to board_list_path(@list.board_id, @list)
+    end
   end
 
 

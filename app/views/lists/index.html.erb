@@ -1,13 +1,27 @@
-<h1>Click a list To View Content</h1>
-<%= link_to 'Create a new list', new_board_list_path(@board) %>
+<br/>
+<h1 class="ui center aligned header"><%= @board.board_name%></h1>
+<h1 class="ui center aligned header">L I S T S</h1>
+<h3 class="ui center aligned header">Choose a List to view Tasks</h3>
+<br/>
 <div>
+  <%= link_to 'Create a new list', new_board_list_path(@board), class: "ui small button" %>
+  <%= link_to 'Back To board', boards_path, class: "ui right floated small button"%>
+</div>
+<br/>
+<hr/>
+<div class="ui grid">
   <% @board.lists.each do |list| %>
-    <%= link_to list.list_name, board_list_path(@board, list) %> -
-    <%=list.list_priority %>
-    
-    <%= link_to "Edit", edit_board_list_path(@board, list), class: "ui orange button" %>
-    <%= link_to "Delete", board_list_path(@board, list), method: :delete, class: "ui red button" %>
+   <div class="sixteen wide mobile eight wide tablet four wide computer column">
+      <div class="ui red card">
+        <div class="content">
+          <h1 class="ui small heading"><%=list.list_priority %>
+          <%= link_to list.list_name, board_list_path(@board, list), class:"ui small heading" %> </h1>
+
+          <%= link_to "Edit", edit_board_list_path(@board, list), class: "ui orange mini button" %>
+          <%= link_to "Delete", board_list_path(@board, list), method: :delete, class: "ui red mini button" %>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 <br/>
-<%= link_to 'Back To board', boards_path %>

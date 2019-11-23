@@ -1,4 +1,26 @@
-<p><%= task.task_name%></p>
-<p><strong><%= task.task_priority%></strong></p>
-<p><strong><%= task.description%></strong></p>
-<h3><%= link_to 'Completed', completed_path(@list, task), method: :post, class:"ui button"%></h3>
+<div>
+ <% if task.completed? %>
+  <p><strong><%= task.task_name%></strong></p>
+  <div class="ui extra content">
+    <p style="color: blue;"><%= task.task_priority%></p>
+    <p><%= task.description%></p>
+  </div>
+  <div>
+    <%= link_to 'Edit Task', edit_list_task_path(@list, task)%>
+    <%= link_to 'Deleted Task', list_task_path(@list, task), method: :delete%>
+    <%= link_to 'Completed', completed_path(@list, task), method: :patch, class:"ui button" %>
+  </div>
+</div>
+<% else %>
+<p><strong><%= task.task_name%></strong></p>
+  <div class="ui extra content">
+    <p style="color: red;"><%= task.task_priority%></p>
+    <p><%= task.description%></p>
+  </div>
+  <div>
+    <%= link_to 'Edit Task', edit_list_task_path(@list, task)%>
+    <%= link_to 'Deleted Task', list_task_path(@list, task), method: :delete%>
+    <%= link_to 'Completed', completed_path(@list, task), method: :patch, class:"ui button" %>
+  </div>
+</div>
+<% end %>

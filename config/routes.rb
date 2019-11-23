@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root "boards#index"
 
-  post 'completed_list_task/:id/:task_id', to: 'tasks#completed', as: 'completed'
+  patch 'completed_list_task/:list_id/:id', to: 'tasks#completed', as: 'completed'
 
   resources :boards do
     resources :lists 

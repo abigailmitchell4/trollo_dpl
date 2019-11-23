@@ -1,3 +1,4 @@
+
 class TasksController < ApplicationController
   before_action :set_list
   before_action :set_task, only: [:show, :edit, :update, :destroy, :completed]
@@ -24,7 +25,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to list_task_path(@task)
+      redirect_to board_list_path(@list.board_id, @list)
     else
       render :edit
     end
@@ -32,17 +33,23 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy 
-    redirect_to list_tasks_path(@task)
+    redirect_to board_list_path(@list.board_id, @list)
   end
 
-  # def completed
-  #   @completed = []
-  #   @completed << Task.find(params[:list_id])
-  #   redirect_to list_tasks_path(@task)
-  # end
+  def completed
+    
+    Task.find(params[:id]).update_attribute(:completed, true)
+    redirect_to board_list_path(@list.board_id, @list)
+    
+    # if @task.completed(task_params)
+    # # @completed = []
+    # # @list.tasks << Task.find(params[:task_id])
+    # redirect_to board_list_path(@list.board_id, @list)
+  end
 
   private
     def set_list
+    
       @list = List.find(params[:list_id])
     end
 
@@ -51,7 +58,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:task_name, :task_priority, :description)
+      params.require(:task).permit(:task_name, :task_priority, :description, :completed)
     end
 
 end

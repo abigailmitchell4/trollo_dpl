@@ -1,5 +1,17 @@
-<h1>Boards</h1>
-
-<% @boards.each do |board| %>
-  <%= render 'boards/list', { board: board } %>
-<% end %>
+<br/>
+<h1 class="ui center aligned header">Welcome to Trollo</h1>
+<br/>
+<h2 class="ui center aligned header">B O A R D S</h2>
+<hr/>
+<br/>
+<div class="ui grid">
+  <% @boards.each do |board| %>
+    <div class="sixteen wide mobile eight wide tablet four wide computer column">
+      <div class="ui red card">
+        <div class="content">
+        <%= render 'boards/list', { board: board } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

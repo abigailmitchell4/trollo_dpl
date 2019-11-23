@@ -1,16 +1,43 @@
-<h1><%= @list.list_name %></h1>
-<h2>In Progress Tasks</h2>
-<%= link_to 'Add Task', new_list_task_path(@list) %>
-<% @list.tasks.each do |task| %>
-  <%= render 'tasks/task', { task: task } %>
-  <%# purple comment: references the variable in _comment.html.erb, second comment is what you named your loop variable
-  this renders 'comments' view folder and references the partial named 'comment' %>
-<% end %>
+<br/>
+<h1 class="ui center aligned header"><%= @list.list_name %></h1>
+<h1 class="ui center aligned header">T A S K S</h1>
+<hr/>
+<div class="ui grid">
+  <div class="sixteen wide mobile eight wide tablet four wide computer column">
+    <div class="ui red card">
+      <div class="content">
+        <h2>In Progress Tasks</h2>
+        <%= link_to 'Add Task', new_list_task_path(@list), class:"ui mini green button" %>
+        <hr/>
+        <% @list.tasks.each do |task| %>
+          <div>
+          <% if task.completed == false %>
+            <p><strong><%= task.task_name%></strong></p>
+            <div class="ui extra content">
+              <p style="color: blue;"><%= task.task_priority%></p>
+              <p><%= task.description%></p>
+            </div>
+            <div>
+              <%= link_to 'Edit Task', edit_list_task_path(@list, task)%>
+              <%= link_to 'Deleted Task', list_task_path(@list, task), method: :delete%>
+              <%= link_to 'Completed', completed_path(@list, task), method: :patch, class:"ui button" %>
+            </div>
+          </div>
+          
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<h2>Completed Tasks</h2>
-<% @list.tasks.each do |task| %>
-  <%= render 'lists/completed', { task: task } %>
-  <%# purple comment: references the variable in _comment.html.erb, second comment is what you named your loop variable
-  this renders 'comments' view folder and references the partial named 'comment' %>
-<% end %>
+
+      <h2>Completed Tasks</h2>
+    
+      <% @list.tasks.each do |task| %>
+          <% if task.completed? %>
+            <h4><%= task.task_name%></h4>
+        <%end%>
+      <% end %>
+
+  </div>
+</div>
 
